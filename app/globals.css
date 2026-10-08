@@ -1,26 +1,212 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #04100e;
+  --foreground: #f5fffd;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: rgba(103, 232, 249, 0.2);
+  color: white;
+}
+
+/* -----------------------------------------
+   JALVĀN GRID
+----------------------------------------- */
+
+.jalvan-grid {
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 1px
+    );
+
+  background-size: 44px 44px;
+
+  mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    transparent 90%
+  );
+}
+
+/* -----------------------------------------
+   VOICE ANIMATIONS
+----------------------------------------- */
+
+@keyframes jalvanWave {
+  0%,
+  100% {
+    transform: scaleY(0.45);
+    opacity: 0.25;
+  }
+
+  50% {
+    transform: scaleY(1);
+    opacity: 0.95;
+  }
+}
+
+.jalvan-wave-active {
+  transform-origin: center;
+  animation-name: jalvanWave;
+  animation-duration: 0.8s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes jalvanPulse {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.8;
+  }
+
+  70% {
+    transform: scale(1.08);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1.08);
+    opacity: 0;
+  }
+}
+
+.jalvan-pulse {
+  animation-name: jalvanPulse;
+  animation-duration: 2s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+}
+
+.jalvan-pulse-delay {
+  animation-name: jalvanPulse;
+  animation-duration: 2s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+  animation-delay: 0.7s;
+}
+
+@keyframes jalvanSpin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.jalvan-spinner {
+  animation-name: jalvanSpin;
+  animation-duration: 0.8s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* -----------------------------------------
+   LEAFLET MAP
+----------------------------------------- */
+
+.jalvan-leaflet-map {
+  height: 620px;
+  width: 100%;
+  background: #071311;
+  z-index: 1;
+}
+
+.jalvan-leaflet-map .leaflet-control-zoom {
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  overflow: hidden;
+  border-radius: 12px !important;
+}
+
+.jalvan-leaflet-map
+  .leaflet-control-zoom
+  a {
+  background: rgba(4, 16, 14, 0.9);
+  color: rgba(255, 255, 255, 0.7);
+  border: 0;
+}
+
+.jalvan-leaflet-map
+  .leaflet-control-zoom
+  a:hover {
+  background: rgba(20, 50, 45, 0.95);
+  color: white;
+}
+
+.jalvan-leaflet-map
+  .leaflet-control-attribution {
+  background: rgba(4, 16, 14, 0.7) !important;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 8px;
+}
+
+.jalvan-leaflet-map
+  .leaflet-control-attribution
+  a {
+  color: rgba(103, 232, 249, 0.55);
+}
+
+.jalvan-leaflet-map
+  .leaflet-popup-content-wrapper {
+  background: #071311;
+  color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+}
+
+.jalvan-leaflet-map
+  .leaflet-popup-tip {
+  background: #071311;
+}
+
+.jalvan-leaflet-map
+  .leaflet-popup-close-button {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* -----------------------------------------
+   SCROLLBAR
+----------------------------------------- */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #04100e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(103, 232, 249, 0.25);
 }
